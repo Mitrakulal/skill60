@@ -10,6 +10,9 @@ import Dashboard from './pages/Dashboard'
 import MarkAttendance from './pages/MarkAttendance'
 import StudentHistory from './pages/StudentHistory'
 import Materials from './pages/Materials'
+import UploadCSV from './pages/UploadCSV'
+import MyAttendance from './pages/MyAttendance'
+import UpcomingSessions from './pages/UpcomingSessions'
 import DevTokens from './pages/DevTokens'
 
 /**
@@ -56,14 +59,14 @@ function App() {
             <Route path="/attendance" element={<MarkAttendance />} />
             <Route path="/history" element={<StudentHistory />} />
             <Route path="/materials" element={<Materials />} />
-            <Route path="/upload" element={<Placeholder title="Upload CSV" />} />
+            <Route path="/upload" element={<UploadCSV />} />
           </Route>
 
           {/* Student routes — wrapped in AppShell + RoleGuard */}
           <Route element={<RoleGuard allowed="student"><AppShell /></RoleGuard>}>
-            <Route path="/me/attendance" element={<Placeholder title="My Attendance" />} />
-            <Route path="/me/upcoming" element={<Placeholder title="Upcoming" />} />
-            <Route path="/me/materials" element={<Placeholder title="Materials" />} />
+            <Route path="/me/attendance" element={<MyAttendance />} />
+            <Route path="/me/upcoming" element={<UpcomingSessions />} />
+            <Route path="/me/materials" element={<Materials />} />
           </Route>
 
           {/* Catch-all */}

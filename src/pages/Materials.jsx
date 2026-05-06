@@ -4,7 +4,10 @@ import { Search, Plus, FileText, Video, Link2, FileSpreadsheet, X, ExternalLink 
 
 const typeIcons = { slides: FileSpreadsheet, recording: Video, document: FileText, link: Link2 }
 
+import { useAuth } from '../contexts/AuthContext'
+
 export default function Materials() {
+  const { role } = useAuth()
   const [sessions, setSessions] = useState([])
   const [materials, setMaterials] = useState([])
   const [month, setMonth] = useState('all')
@@ -58,7 +61,9 @@ export default function Materials() {
           <input className="input" placeholder="Search topics or materials..." value={search}
             onChange={e => setSearch(e.target.value)} style={{ paddingLeft: '40px' }} />
         </div>
-        <button className="btn-primary" onClick={() => setShowAdd(true)}><Plus size={16} /> Add Material</button>
+        {role === 'mentor' && (
+          <button className="btn-primary" onClick={() => setShowAdd(true)}><Plus size={16} /> Add Material</button>
+        )}
       </div>
 
       {/* Materials grid */}
