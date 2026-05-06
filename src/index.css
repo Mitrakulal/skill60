@@ -1,0 +1,486 @@
+@import "tailwindcss";
+
+/* ============================================================
+   ForgeTrack Design System — CSS Custom Properties
+   Reference: ForgeTrack_Design_System.md §2–§6
+   ============================================================ */
+
+@theme {
+  /* ── Colors: Canvas & Surfaces ── */
+  --color-void:            #07070B;
+  --color-canvas:          #0B0B11;
+  --color-surface:         #111118;
+  --color-surface-raised:  #16161F;
+  --color-surface-inset:   #0E0E14;
+
+  /* ── Colors: Borders ── */
+  --color-border-subtle:   rgba(255, 255, 255, 0.06);
+  --color-border-default:  rgba(255, 255, 255, 0.10);
+  --color-border-strong:   rgba(255, 255, 255, 0.16);
+
+  /* ── Colors: Text ── */
+  --color-fg-primary:      #F5F5F7;
+  --color-fg-secondary:    #8A8A94;
+  --color-fg-tertiary:     #52525B;
+  --color-fg-inverse:      #0B0B11;
+
+  /* ── Colors: Accent ── */
+  --color-accent-glow:     #6366F1;
+  --color-accent-glow-soft: rgba(99, 102, 241, 0.15);
+
+  /* ── Colors: Semantic — Success (Present) ── */
+  --color-success:         #10B981;
+  --color-success-bg:      rgba(16, 185, 129, 0.12);
+  --color-success-border:  rgba(16, 185, 129, 0.25);
+
+  /* ── Colors: Semantic — Danger (Absent) ── */
+  --color-danger:          #F43F5E;
+  --color-danger-bg:       rgba(244, 63, 94, 0.12);
+  --color-danger-border:   rgba(244, 63, 94, 0.25);
+
+  /* ── Colors: Semantic — Warning ── */
+  --color-warning:         #F59E0B;
+  --color-warning-bg:      rgba(245, 158, 11, 0.12);
+  --color-warning-border:  rgba(245, 158, 11, 0.25);
+
+  /* ── Colors: Semantic — Info ── */
+  --color-info:            #3B82F6;
+  --color-info-bg:         rgba(59, 130, 246, 0.12);
+  --color-info-border:     rgba(59, 130, 246, 0.25);
+
+  /* ── Fonts ── */
+  --font-display: 'Satoshi', 'Inter', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'SF Mono', monospace;
+
+  /* ── Spacing (4px base) ── */
+  --spacing-1:   4px;
+  --spacing-2:   8px;
+  --spacing-3:   12px;
+  --spacing-4:   16px;
+  --spacing-5:   20px;
+  --spacing-6:   24px;
+  --spacing-8:   32px;
+  --spacing-10:  40px;
+  --spacing-12:  48px;
+  --spacing-16:  64px;
+  --spacing-20:  80px;
+  --spacing-24:  96px;
+
+  /* ── Border Radius ── */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-xl:   18px;
+  --radius-2xl:  24px;
+  --radius-full: 9999px;
+}
+
+:root {
+  /* ── Shadows & Glows (can't go in @theme) ── */
+  --shadow-card:   0 1px 2px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--color-border-subtle);
+  --shadow-raised: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--color-border-default);
+  --shadow-focus:  0 0 0 3px rgba(99, 102, 241, 0.25);
+
+  /* ── Gradients ── */
+  --glow-cosmic: radial-gradient(
+    ellipse 600px 300px at 50% -100px,
+    rgba(99, 102, 241, 0.18),
+    rgba(99, 102, 241, 0) 70%
+  );
+  --card-gradient: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0) 50%
+  );
+  --dot-grid: radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+}
+
+
+/* ============================================================
+   Base Styles
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-void);
+  color: var(--color-fg-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main app wrapper — cosmic glow applied once */
+.app-main {
+  background-image: var(--glow-cosmic);
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+
+/* ============================================================
+   Typography Utilities
+   ============================================================ */
+
+.text-display-hero {
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  line-height: 1.0;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.text-display-lg {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums;
+}
+
+.text-display-md {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.text-display-sm {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  font-variant-numeric: tabular-nums;
+}
+
+.text-h1 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.text-h2 {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+.text-h3 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.text-body-lg {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.text-body {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.text-body-sm {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+.text-caption {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.text-label {
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.text-micro {
+  font-size: 0.625rem;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   Component Primitives
+   ============================================================ */
+
+/* Card — the workhorse surface */
+.card {
+  background: var(--color-surface);
+  background-image: var(--card-gradient);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-8);
+}
+
+.card-hero {
+  background: var(--color-surface);
+  background-image: var(--card-gradient);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-10);
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  background: var(--color-fg-primary);
+  color: var(--color-fg-inverse);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-primary:hover {
+  background: #E5E5E7;
+}
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  background: var(--color-surface-raised);
+  color: var(--color-fg-primary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-secondary:hover {
+  background: var(--color-surface);
+}
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  background: var(--color-surface-raised);
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger-border);
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+/* Inputs */
+.input {
+  background: var(--color-surface-inset);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  color: var(--color-fg-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  height: 44px;
+  width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.input:focus {
+  border-color: var(--color-accent-glow);
+  box-shadow: var(--shadow-focus);
+  outline: none;
+}
+.input::placeholder {
+  color: var(--color-fg-tertiary);
+}
+
+/* Status Pills */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.pill-success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+  border: 1px solid var(--color-success-border);
+}
+
+.pill-danger {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger-border);
+}
+
+.pill-warning {
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
+  border: 1px solid var(--color-warning-border);
+}
+
+.pill-info {
+  background: var(--color-info-bg);
+  color: var(--color-info);
+  border: 1px solid var(--color-info-border);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 7, 11, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal {
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-raised);
+  padding: var(--spacing-10);
+  max-width: 560px;
+  width: calc(100% - 32px);
+}
+
+/* Table */
+.ft-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.ft-table thead th {
+  text-align: left;
+  padding: 16px 20px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-fg-tertiary);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ft-table tbody td {
+  padding: 18px 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-fg-primary);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ft-table tbody tr:hover {
+  background: var(--color-surface-raised);
+}
+
+
+/* ============================================================
+   Responsive utilities
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .text-display-hero {
+    font-size: clamp(2rem, 8vw, 4.5rem);
+  }
+  .text-display-lg {
+    font-size: clamp(1.75rem, 6vw, 3.5rem);
+  }
+  .text-display-md {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+  .card, .card-hero {
+    padding: var(--spacing-6);
+  }
+
+  /* Sidebar → drawer on mobile */
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+  .sidebar-mobile-trigger {
+    display: flex !important;
+  }
+  .sidebar-mobile-close {
+    display: block !important;
+  }
+  .sidebar-mobile-overlay {
+    display: block !important;
+  }
+}
+
+/* Pulse animation for loading skeletons */
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--color-surface-inset); }
+::-webkit-scrollbar-thumb { background: var(--color-border-default); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-border-strong); }
